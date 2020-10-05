@@ -11,6 +11,7 @@ const ExerciseForm = ({ form, handleSubmit, handleChange }) => (
           name="title"
           value={form.title}
           onChange={handleChange}
+          required
         />
       </div>
       <div className="form-group">
@@ -21,6 +22,18 @@ const ExerciseForm = ({ form, handleSubmit, handleChange }) => (
           name="description"
           value={form.description}
           onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="img"
+          name="img"
+          value={form.img}
+          onChange={handleChange}
+          required
         />
       </div>
       <div className="form-row">
@@ -32,6 +45,7 @@ const ExerciseForm = ({ form, handleSubmit, handleChange }) => (
             name="leftColor"
             value={form.leftColor}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="col">
@@ -42,6 +56,7 @@ const ExerciseForm = ({ form, handleSubmit, handleChange }) => (
             name="rightColor"
             value={form.rightColor}
             onChange={handleChange}
+            required
           />
         </div>
       </div>
