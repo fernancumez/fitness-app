@@ -5,7 +5,7 @@ const ExerciseList = ({ exercises }) => (
   <Fragment>
     {exercises.map((exercise) => (
       <Card
-        key={exercise.id}
+        key={exercise._id}
         title={exercise.title}
         description={exercise.description}
         img={exercise.img}
