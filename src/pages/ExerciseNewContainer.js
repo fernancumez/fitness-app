@@ -2,26 +2,30 @@ import React, { useState } from "react";
 import ExerciseNew from "./ExerciseNew";
 import Loading from "../components/Loading";
 import FatalError from "./500";
-import { API } from "../config";
 import "../styles/ExerciseNew.css";
 
+import { useDispatch } from "react-redux";
+import { createExercises } from "../redux/actions/exerciseActions";
+
 const ExerciseNewContainer = ({ history }) => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [form, setForm] = useState({
+  const initialState = {
     title: "",
     description: "",
     img: "",
     leftColor: "",
     rightColor: "",
-  });
+  };
 
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [form, setForm] = useState(initialState);
 
+  const dispatch = useDispatch();
+
+  const handleChange = ({ target }) => {
     setForm({
       ...form,
-      [name]: value,
+      [target.name]: target.value,
     });
   };
 
@@ -30,18 +34,10 @@ const ExerciseNewContainer = ({ history }) => {
     setLoading(true);
 
     try {
-      let config = {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      };
+      dispatch(createExercises(form));
 
-      await fetch(`${API}/exercises`, config);
-      setLoading(false);
       history.push("/exercise");
+      setLoading(false);
     } catch (error) {
       setError(error);
       setLoading(false);
